@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+//From https://answers.unity.com/questions/1344322/free-mouse-rotating-camera.html
 public class FreeCameraUpRight : MonoBehaviour
 {
     public float sensitivity = 10f;
