@@ -12,7 +12,7 @@ public class SpotLightManager : NetworkedBehaviour
     {
         if (IsOwner)
         {
-            mainCamera = GameObject.Find("MainCamera");
+            mainCamera = GameObject.Find("CameraWrapper");
             transform.position = mainCamera.transform.position;
 
         }
