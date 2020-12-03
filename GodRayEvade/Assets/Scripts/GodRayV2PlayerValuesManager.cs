@@ -27,21 +27,7 @@ public class GodRayV2PlayerValuesManager : NetworkedBehaviour
         }
     }
 
-    private void OnCollisionStay(Collision col)
-    {
-        //if (IsServer)
-        //{
-        //    if (col.gameObject.GetComponent<WeaponManager>())
-        //    {
-        //        if (IsOwner && !col.gameObject.GetComponent<WeaponManager>().IsOwner)
-        //            TakeDamage(damage);
-        //        if (!IsOwner && col.gameObject.GetComponent<WeaponManager>().IsOwner)
-        //            TakeDamage(damage);
-        //    }
-        //}
-    }
-
-    void TakeDamage(int damages)
+    public void TakeDamage(int damages)
     {
         currentHealth.Value -= damages;
     }

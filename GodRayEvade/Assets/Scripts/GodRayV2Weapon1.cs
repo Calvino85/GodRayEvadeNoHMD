@@ -3,20 +3,22 @@ using System.Collections.Generic;
 using UnityEngine;
 using MLAPI;
 
-public class GodRayV2Energy : NetworkedBehaviour
+public class GodRayV2Weapon1 : NetworkedBehaviour
 {
     private int player;
-    private GameObject ownerPlayer;
-    public float sightEnergyMultiplier;
-    public float energyAddition;
-    private float energyDeltaTime;
+    private GameObject enemyPlayer;
+    public float sightSpeedMultiplier;
+    public float basicSpeed;
+    private float shootDeltaTime;
     private float sightDeltaTime;
     private bool lastFrameLookedAt;
+
+    public GameObject bullet1Prefab;
 
     // Start is called before the first frame update
     void Start()
     {
-        energyDeltaTime = 0;
+        shootDeltaTime = 0;
         sightDeltaTime = 0;
         lastFrameLookedAt = false;
     }
@@ -37,29 +39,28 @@ public class GodRayV2Energy : NetworkedBehaviour
             }
             lastFrameLookedAt = false;
 
-            if (ownerPlayer != null)
+            if (enemyPlayer != null)
             {
-                energyDeltaTime += Time.deltaTime;
-                if(energyDeltaTime > 0.1f)
+                shootDeltaTime += Time.deltaTime;
+                if(shootDeltaTime > basicSpeed * (1f - sightDeltaTime * sightSpeedMultiplier))
                 {
-                    int energytoAdd = (int)(energyAddition * (1 + sightEnergyMultiplier * sightDeltaTime));
-                    ownerPlayer.GetComponent<GodRayV2PlayerValuesManager>().AddEnergy(energytoAdd);
-                    energyDeltaTime = 0;
+                    shootDeltaTime = 0f;
+                    GameObject bullet1 = Instantiate(bullet1Prefab, transform);
+                    bullet1.GetComponent<Rigidbody>().velocity = Vector3.Normalize(transform.position - enemyPlayer.transform.position) * -5f;
                 }
-                
             }
             else
             {
                 GodRayV2PlayerValuesManager[] players = GameObject.FindObjectsOfType<GodRayV2PlayerValuesManager>();
                 foreach (GodRayV2PlayerValuesManager tPlayer in players)
                 {
-                    if (tPlayer.IsOwner && player == 1)
+                    if (!tPlayer.IsOwner && player == 1)
                     {
-                        ownerPlayer = tPlayer.gameObject;
+                        enemyPlayer = tPlayer.gameObject;
                     }
-                    else if (!tPlayer.IsOwner && player == 2)
+                    else if (tPlayer.IsOwner && player == 2)
                     {
-                        ownerPlayer = tPlayer.gameObject;
+                        enemyPlayer = tPlayer.gameObject;
                     }
                 }
             }

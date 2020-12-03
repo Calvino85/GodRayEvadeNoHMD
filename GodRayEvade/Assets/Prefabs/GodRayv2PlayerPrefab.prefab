@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 805189273}
   - component: {fileID: 805189275}
   - component: {fileID: 805189274}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -85,7 +85,7 @@ GameObject:
   - component: {fileID: 970856821}
   - component: {fileID: 970856823}
   - component: {fileID: 970856822}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -159,7 +159,7 @@ GameObject:
   - component: {fileID: 1375135607}
   - component: {fileID: 1375135609}
   - component: {fileID: 1375135608}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Energy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 1426627390}
   - component: {fileID: 1426627392}
   - component: {fileID: 1426627391}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: EnergyBarPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -337,7 +337,7 @@ GameObject:
   - component: {fileID: 1705217807}
   - component: {fileID: 1705217806}
   - component: {fileID: 1705217805}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CanvasPlayerEnergy
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -440,7 +440,7 @@ GameObject:
   - component: {fileID: 8516608210273731268}
   - component: {fileID: 337792816}
   - component: {fileID: 35864366}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: GodRayV2PlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -639,7 +639,7 @@ GameObject:
   - component: {fileID: 2598082482447982659}
   - component: {fileID: 1555854866407043578}
   - component: {fileID: 3416240679777904986}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: HealthBarPlayer
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -743,7 +743,7 @@ GameObject:
   - component: {fileID: 8976538011422637797}
   - component: {fileID: 5668424133088007754}
   - component: {fileID: 868991968829052133}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Fill
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -816,7 +816,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4114491984732313570}
   - component: {fileID: 3072827953930335321}
-  m_Layer: 0
+  m_Layer: 8
   m_Name: Bars
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -863,7 +863,7 @@ GameObject:
   - component: {fileID: 4187863696671510267}
   - component: {fileID: 5606536596066851458}
   - component: {fileID: 2027313918282439149}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: CanvasPlayerHealth
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -961,7 +961,7 @@ GameObject:
   - component: {fileID: 7749851644154431824}
   - component: {fileID: 4778139802210029000}
   - component: {fileID: 2226126663644514082}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Border
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1035,7 +1035,7 @@ GameObject:
   - component: {fileID: 6816648850693006089}
   - component: {fileID: 1908042821780585898}
   - component: {fileID: 4768463342251550338}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Text
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -1113,7 +1113,7 @@ GameObject:
   - component: {fileID: 3753879664607232413}
   - component: {fileID: 7397357512426125456}
   - component: {fileID: 250924534249552275}
-  m_Layer: 5
+  m_Layer: 8
   m_Name: Heart
   m_TagString: Untagged
   m_Icon: {fileID: 0}

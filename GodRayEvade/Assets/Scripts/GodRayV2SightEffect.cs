@@ -8,11 +8,13 @@ public class GodRayV2SightEffect : NetworkedBehaviour
     private RaycastHit hit;
 
     private int layerMaskGold;
+    private int layerMaskWeapon1;
 
     // Start is called before the first frame update
     void Start()
     {
         layerMaskGold = 1 << 11;
+        layerMaskWeapon1 = 1 << 12;
     }
 
     // Update is called once per frame
@@ -22,15 +24,28 @@ public class GodRayV2SightEffect : NetworkedBehaviour
         {
             if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMaskGold))
             {
-                GodRayV2Energy gold = hit.collider.gameObject.GetComponent<GodRayV2Energy>();
+                GodRayV2Energy energySource = hit.collider.gameObject.GetComponent<GodRayV2Energy>();
                 
-                if (gold.getPlayer() == 1  && IsOwner)
+                if (energySource.getPlayer() == 1  && IsOwner)
                 {
-                    gold.beingLookedAt();
+                    energySource.beingLookedAt();
                 }
-                else if (gold.getPlayer() == 2 && !IsOwner)
+                else if (energySource.getPlayer() == 2 && !IsOwner)
                 {
-                    gold.beingLookedAt();
+                    energySource.beingLookedAt();
+                }
+            }
+            else if (Physics.Raycast(transform.position, transform.forward, out hit, Mathf.Infinity, layerMaskWeapon1))
+            {
+                GodRayV2Weapon1 weapon1 = hit.collider.gameObject.GetComponent<GodRayV2Weapon1>();
+
+                if (weapon1.getPlayer() == 1 && IsOwner)
+                {
+                    weapon1.beingLookedAt();
+                }
+                else if (weapon1.getPlayer() == 2 && !IsOwner)
+                {
+                    weapon1.beingLookedAt();
                 }
             }
         }

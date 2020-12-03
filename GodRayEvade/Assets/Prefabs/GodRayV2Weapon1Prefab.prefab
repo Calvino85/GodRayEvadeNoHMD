@@ -14,8 +14,9 @@ GameObject:
   - component: {fileID: 6355124647962491522}
   - component: {fileID: 5994964451005135646}
   - component: {fileID: 1776303523710401816}
-  m_Layer: 0
-  m_Name: Weapon1
+  - component: {fileID: -5439172379209205092}
+  m_Layer: 12
+  m_Name: GodRayV2Weapon1Prefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -160,3 +161,19 @@ MonoBehaviour:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &-5439172379209205092
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3522780746765841801}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 07861c7fd8ea3434da26767576fdee7a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sightSpeedMultiplier: 0.5
+  basicSpeed: 1
+  bullet1Prefab: {fileID: 7976014236996090125, guid: ccb317f2ca96549aa9b7389223ba3346,
+    type: 3}

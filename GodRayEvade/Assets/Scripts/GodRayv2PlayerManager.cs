@@ -194,15 +194,13 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
         {
             GameObject energySource = Instantiate(energyPrefab, position, Quaternion.identity);
             energySource.GetComponent<NetworkedObject>().Spawn();
-            energySource.GetComponent<GodRayV2Energy>().assignServerPlayer(this.gameObject);
             energySource.GetComponent<GodRayV2Energy>().assignPlayer(player);
         }
         if (hitWeapon1)
         {
             GameObject weapon1 = Instantiate(weapon1Prefab, position, Quaternion.identity);
             weapon1.GetComponent<NetworkedObject>().Spawn();
-            //weapon.GetComponent<GodRayV2Energy>().assignServerPlayer(this.gameObject);
-            //weapon.GetComponent<GodRayV2Energy>().assignPlayer(player);
+            weapon1.GetComponent<GodRayV2Weapon1>().assignPlayer(player);
         }
     }
 }
