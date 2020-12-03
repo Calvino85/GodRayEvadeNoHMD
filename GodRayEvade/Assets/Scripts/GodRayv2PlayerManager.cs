@@ -17,13 +17,18 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
     public Material player2Material;
     private GameObject player1SpotLight;
     private GameObject player2SpotLight;
-    public GameObject goldPrefab;
+    public GameObject energyPrefab;
+    public GameObject weapon1Prefab;
+    private GodRayV2PlayerValuesManager player1ValuesManager;
+    private GodRayV2PlayerValuesManager player2ValuesManager;
 
-    private bool player1HasGold = false;
-    private bool player2HasGold = false;
+    private bool player1HasEnergySource = false;
+    private bool player2HasEnergySource = false;
 
-    private string PLAYER_NAME = "ME";
-    private string OTHER_NAME = "THE OTHER";
+    public string PLAYER_NAME = "ME";
+    public string OTHER_NAME = "YOU";
+
+    public int WEAPON1_COST = 1000;
 
     // Start is called before the first frame update
     void Start()
@@ -95,52 +100,109 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
 
     void Update()
     {
-        if(Input.GetKeyDown(KeyCode.Space))
+        if(IsServer)
         {
-            if (IsServer)
+            if(IsOwner)
             {
-                CreateGold(1);
+                if (player1ValuesManager == null)
+                {
+                    player1ValuesManager = GetComponent<GodRayV2PlayerValuesManager>();
+                }
+                if (player2ValuesManager == null)
+                {
+                    GodRayV2PlayerValuesManager[] players = GameObject.FindObjectsOfType<GodRayV2PlayerValuesManager>();
+                    foreach (GodRayV2PlayerValuesManager tPlayer in players)
+                    {
+                        if (!tPlayer.IsOwner)
+                        {
+                            player2ValuesManager = tPlayer;
+                        }
+                    }
+                }
             }
-            else
+                
+        }    
+        if(IsOwner)
+        {
+            if (Input.GetKeyDown(KeyCode.Space))
             {
-                InvokeServerRpc(CreateGold, 2);
+                if (IsServer)
+                {
+                    CreateObject(1);
+                }
+                else
+                {
+                    InvokeServerRpc(CreateObject, 2);
+                }
             }
         }
     }
 
     [ServerRPC]
-    private void CreateGold(int player)
+    private void CreateObject(int player)
     {
         Vector3 position = new Vector3();
         RaycastHit hit;
         int layerMask = 1 << 10;
-        bool hitFound = false;
-        if (player == 1 && !player1HasGold)
+        bool hitEnergy = false;
+        bool hitWeapon1 = false;
+
+        if (player == 1)
         {
-            if (Physics.Raycast(player1SpotLight.transform.position, player1SpotLight.transform.forward, out hit, Mathf.Infinity, layerMask))
+            if(!player1HasEnergySource)
             {
-                position = hit.point;
-                player1HasGold = true;
-                hitFound = true;
+                if (Physics.Raycast(player1SpotLight.transform.position, player1SpotLight.transform.forward, out hit, Mathf.Infinity, layerMask))
+                {
+                    position = hit.point;
+                    player1HasEnergySource = true;
+                    hitEnergy = true;
+                }
             }
-            
-        }
-        else if (player == 2 && !player2HasGold)
-        {
-            if (Physics.Raycast(player2SpotLight.transform.position, player2SpotLight.transform.forward, out hit, Mathf.Infinity, layerMask))
+            else if(player1ValuesManager.getEnergy() >= 1000)
             {
-                position = hit.point;
-                player2HasGold = true;
-                hitFound = true;
+                if (Physics.Raycast(player1SpotLight.transform.position, player1SpotLight.transform.forward, out hit, Mathf.Infinity, layerMask))
+                {
+                    position = hit.point;
+                    player1ValuesManager.RemoveEnergy(1000);
+                    hitWeapon1 = true;
+                }
+            }
+        }
+        else if (player == 2)
+        {
+            if(!player2HasEnergySource)
+            {
+                if (Physics.Raycast(player2SpotLight.transform.position, player2SpotLight.transform.forward, out hit, Mathf.Infinity, layerMask))
+                {
+                    position = hit.point;
+                    player2HasEnergySource = true;
+                    hitEnergy = true;
+                }
+            }
+            else if (player2ValuesManager.getEnergy() >= 1000)
+            {
+                if (Physics.Raycast(player2SpotLight.transform.position, player2SpotLight.transform.forward, out hit, Mathf.Infinity, layerMask))
+                {
+                    position = hit.point;
+                    player2ValuesManager.RemoveEnergy(1000);
+                    hitWeapon1 = true;
+                }
             }
         }
 
-        if (hitFound)
+        if (hitEnergy)
         {
-            GameObject goldObject = Instantiate(goldPrefab, position, Quaternion.identity);
-            goldObject.GetComponent<NetworkedObject>().Spawn();
-            goldObject.GetComponent<GodRayV2Energy>().assignServerPlayer(this.gameObject);
-            goldObject.GetComponent<GodRayV2Energy>().assignPlayer(player);
+            GameObject energySource = Instantiate(energyPrefab, position, Quaternion.identity);
+            energySource.GetComponent<NetworkedObject>().Spawn();
+            energySource.GetComponent<GodRayV2Energy>().assignServerPlayer(this.gameObject);
+            energySource.GetComponent<GodRayV2Energy>().assignPlayer(player);
+        }
+        if (hitWeapon1)
+        {
+            GameObject weapon1 = Instantiate(weapon1Prefab, position, Quaternion.identity);
+            weapon1.GetComponent<NetworkedObject>().Spawn();
+            //weapon.GetComponent<GodRayV2Energy>().assignServerPlayer(this.gameObject);
+            //weapon.GetComponent<GodRayV2Energy>().assignPlayer(player);
         }
     }
 }

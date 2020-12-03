@@ -55,6 +55,20 @@ public class GodRayV2PlayerValuesManager : NetworkedBehaviour
         }
     }
 
+    public void RemoveEnergy(int energy)
+    {
+        currentEnergy.Value -= energy;
+        if (currentEnergy.Value < 0)
+        {
+            currentEnergy.Value = 0;
+        }
+    }
+
+    public int getEnergy()
+    {
+        return currentEnergy.Value;
+    }
+
     void Update()
     {
         healthBar.SetHealth(currentHealth.Value);
