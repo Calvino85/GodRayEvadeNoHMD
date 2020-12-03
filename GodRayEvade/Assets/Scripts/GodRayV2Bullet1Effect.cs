@@ -21,12 +21,13 @@ public class GodRayV2Bullet1Effect : NetworkedBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-        if(IsServer)
+        if (other.gameObject.layer == 8)
         {
-            if(other.gameObject.layer == 8)
+            if(IsServer)
             {
                 other.GetComponent<GodRayV2PlayerValuesManager>().TakeDamage(damage);
             }
+            Destroy(this.gameObject);
         }
     }
 }

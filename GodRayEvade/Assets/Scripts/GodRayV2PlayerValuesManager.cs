@@ -22,9 +22,9 @@ public class GodRayV2PlayerValuesManager : NetworkedBehaviour
         {
             currentHealth.Value = maxHealth;
             currentEnergy.Value = 0;
-            healthBar.SetMaxHealth(maxHealth);
-            energyBar.SetMaxHealth(maxEnergy);
         }
+        healthBar.SetMaxHealth(maxHealth);
+        energyBar.SetMaxHealth(maxEnergy);
     }
 
     public void TakeDamage(int damages)

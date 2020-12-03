@@ -108,19 +108,14 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
                 {
                     player1ValuesManager = GetComponent<GodRayV2PlayerValuesManager>();
                 }
+            }
+            else
+            {
                 if (player2ValuesManager == null)
                 {
-                    GodRayV2PlayerValuesManager[] players = GameObject.FindObjectsOfType<GodRayV2PlayerValuesManager>();
-                    foreach (GodRayV2PlayerValuesManager tPlayer in players)
-                    {
-                        if (!tPlayer.IsOwner)
-                        {
-                            player2ValuesManager = tPlayer;
-                        }
-                    }
+                    player2ValuesManager = GetComponent<GodRayV2PlayerValuesManager>();
                 }
-            }
-                
+            }   
         }    
         if(IsOwner)
         {
