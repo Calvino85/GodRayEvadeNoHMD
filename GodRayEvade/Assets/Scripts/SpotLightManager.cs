@@ -7,14 +7,24 @@ public class SpotLightManager : NetworkedBehaviour
 {
     private GameObject mainCamera;
 
+    private EyeTracker eyeTracker;
+    public bool isHMD;
+
     // Start is called before the first frame update
     void Start()
     {
         if (IsOwner)
         {
-            mainCamera = GameObject.Find("CameraWrapper");
+            if (isHMD)
+            {
+                eyeTracker = GameObject.Find("SRanipal").GetComponent<EyeTracker>();
+                mainCamera = GameObject.Find("MainCamera");
+            }
+            else
+            {
+                mainCamera = GameObject.Find("CameraWrapper");
+            }
             transform.position = mainCamera.transform.position;
-
         }
 
         if (IsServer)
@@ -38,7 +48,19 @@ public class SpotLightManager : NetworkedBehaviour
     {
         if (IsOwner)
         {
-            transform.rotation = mainCamera.transform.rotation;
+            if(isHMD)
+            {
+                Ray rightEyeRay = eyeTracker.GetRay(EyeTracker.Source.Right);
+                Ray leftEyeRay = eyeTracker.GetRay(EyeTracker.Source.Left);
+                Ray combinedEyeRay = eyeTracker.GetRay(EyeTracker.Source.Combined);
+                Vector3 lookAtPosition = mainCamera.transform.position + Vector3.Slerp(rightEyeRay.direction, leftEyeRay.direction, 0.5f) * 1.5f;
+                transform.position = mainCamera.transform.position;
+                transform.LookAt(lookAtPosition);
+            }
+            else
+            {
+                transform.rotation = mainCamera.transform.rotation;
+            }
         }
 
     }

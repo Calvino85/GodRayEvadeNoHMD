@@ -441,7 +441,7 @@ GameObject:
   - component: {fileID: 337792816}
   - component: {fileID: 35864366}
   m_Layer: 8
-  m_Name: GodRayV2PlayerPrefab
+  m_Name: GodRayv2PlayerPrefab
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -600,6 +600,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2c5274ecd5fb2c84e99c4a201b7e09bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  eyeTracker: {fileID: 0}
   spotlightPrefab: {fileID: 5455091564663690104, guid: 63e9ba1f4c0bb42a8b760231bd690d8e,
     type: 3}
   player1Material: {fileID: 2100000, guid: d482813f6220a074192ced565b81ffb9, type: 2}
@@ -608,9 +609,11 @@ MonoBehaviour:
     type: 3}
   weapon1Prefab: {fileID: 3522780746765841801, guid: ed00cca19e6d04c77b6ad67cb2f41d55,
     type: 3}
+  isHMD: 1
   PLAYER_NAME: ME
   OTHER_NAME: YOU
   WEAPON1_COST: 1000
+  winkThreshold: 0.3
 --- !u!114 &35864366
 MonoBehaviour:
   m_ObjectHideFlags: 0

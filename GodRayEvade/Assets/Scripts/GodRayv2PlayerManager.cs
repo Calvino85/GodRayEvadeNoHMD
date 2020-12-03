@@ -8,6 +8,7 @@ using UnityEngine.UI;
 public class GodRayv2PlayerManager : NetworkedBehaviour
 {
     private GameObject cameraWrapper;
+    private EyeTracker eyeTracker;
     private GameObject camera1Pos;
     private GameObject camera2Pos;
     private GameObject player1Pos;
@@ -21,6 +22,7 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
     public GameObject weapon1Prefab;
     private GodRayV2PlayerValuesManager player1ValuesManager;
     private GodRayV2PlayerValuesManager player2ValuesManager;
+    public bool isHMD;
 
     private bool player1HasEnergySource = false;
     private bool player2HasEnergySource = false;
@@ -29,6 +31,9 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
     public string OTHER_NAME = "YOU";
 
     public int WEAPON1_COST = 1000;
+
+    [Tooltip("The minimal difference in eye openness between the left and right eye required for a wink.")]
+    public float winkThreshold = 0.3f;
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +46,11 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
 
         if (IsOwner)
         {
+            if (isHMD)
+            {
+                eyeTracker = GameObject.Find("SRanipal").GetComponent<EyeTracker>();
+            }
+
             if (IsServer)
             {
                 transform.position = player1Pos.transform.position;
@@ -119,7 +129,19 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
         }    
         if(IsOwner)
         {
-            if (Input.GetKeyDown(KeyCode.Space))
+            bool createObject = false;
+            if(isHMD)
+            {
+                float eyeOpennessR = eyeTracker.GetEyeOpenness(EyeTracker.Source.Right);
+                float eyeOpennessL = eyeTracker.GetEyeOpenness(EyeTracker.Source.Left);
+                createObject = Mathf.Abs(eyeOpennessR - eyeOpennessL) > winkThreshold;
+            }
+            else
+            {
+                createObject = Input.GetKeyDown(KeyCode.Space);
+            }
+
+            if (createObject)
             {
                 if (IsServer)
                 {
