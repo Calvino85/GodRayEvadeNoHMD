@@ -619,7 +619,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxHealth: 1000000
-  maxEnergy: 10000
+  maxEnergy: 1000
   damage: 1
   healthBar: {fileID: 3416240679777904986}
   energyBar: {fileID: 1426627391}

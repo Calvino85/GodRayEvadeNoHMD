@@ -10,11 +10,12 @@ public class GodRayV2Gold : NetworkedBehaviour
     private GameObject ownerPlayer;
     public int energyMultiplier;
     public int energyAddition;
+    private float energyDeltaTime;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        energyDeltaTime = 0;
     }
 
     // Update is called once per frame
@@ -24,7 +25,13 @@ public class GodRayV2Gold : NetworkedBehaviour
         {
             if (ownerPlayer != null)
             {
-                ownerPlayer.GetComponent<GodRayV2PlayerValuesManager>().AddEnergy(energyAddition * energyMultiplier);
+                energyDeltaTime += Time.deltaTime;
+                if(energyDeltaTime > 1)
+                {
+                    ownerPlayer.GetComponent<GodRayV2PlayerValuesManager>().AddEnergy(energyAddition * energyMultiplier);
+                    energyDeltaTime = 0;
+                }
+                
             }
             else
             {

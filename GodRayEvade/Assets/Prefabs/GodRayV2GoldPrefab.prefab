@@ -174,4 +174,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   energyMultiplier: 1
-  energyAddition: 1
+  energyAddition: 50
