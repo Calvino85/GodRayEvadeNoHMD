@@ -139,8 +139,8 @@ public class GodRayv2PlayerManager : NetworkedBehaviour
         {
             GameObject goldObject = Instantiate(goldPrefab, position, Quaternion.identity);
             goldObject.GetComponent<NetworkedObject>().Spawn();
-            goldObject.GetComponent<GodRayV2Gold>().assignServerPlayer(this.gameObject);
-            goldObject.GetComponent<GodRayV2Gold>().assignPlayer(player);
+            goldObject.GetComponent<GodRayV2Energy>().assignServerPlayer(this.gameObject);
+            goldObject.GetComponent<GodRayV2Energy>().assignPlayer(player);
         }
     }
 }

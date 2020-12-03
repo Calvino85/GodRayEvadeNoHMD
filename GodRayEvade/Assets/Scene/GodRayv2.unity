@@ -577,12 +577,13 @@ MonoBehaviour:
     RegisteredScenes:
     - NetworkTest
     - GodRayv2
+    - GodRayV2
     AllowRuntimeSceneChanges: 0
     NetworkedPrefabs:
     - Prefab: {fileID: 187918666464124838, guid: c3950a8befcc8ec46838af1371a7b361,
         type: 3}
       PlayerPrefab: 1
-    - Prefab: {fileID: 5455091564663690104, guid: dd8cc714e0b504816aa5d7e92019d1e0,
+    - Prefab: {fileID: 5455091564663690104, guid: 63e9ba1f4c0bb42a8b760231bd690d8e,
         type: 3}
       PlayerPrefab: 0
     - Prefab: {fileID: 4999759126113783775, guid: c688417b31bbf1848b682a30976e5d61,
